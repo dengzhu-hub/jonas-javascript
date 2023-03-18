@@ -20,7 +20,9 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal))
+btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+const outid = btnCloseModal.getAttribute('class');
+console.log(outid);
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
