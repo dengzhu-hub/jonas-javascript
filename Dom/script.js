@@ -48,4 +48,7 @@ const attr = document.getSelection();
 console.log(attr);
 const header = document.querySelector('.header');
 console.log(header);
+const  allSections = document.querySelectorAll('.section');
+
+
 
