@@ -1,0 +1,19 @@
+[
+    {
+        "title": "Professional Javascript",
+        "authors": [
+            "Nicholas C. zakas",
+            "Matt Frisbie"
+        ],
+        "edition": 4,
+        "year": 2017
+    },
+    {
+        "title": "Professional Javascript",
+        "authors": [
+            "Nicholas C. zakas"
+        ],
+        "edition": 3,
+        "year": 2011
+    }
+]
