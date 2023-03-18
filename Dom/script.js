@@ -49,6 +49,10 @@ console.log(attr);
 const header = document.querySelector('.header');
 console.log(header);
 const  allSections = document.querySelectorAll('.section');
+console.log(allSections);
+console.log(allSections.length);
+
+
 
 
 
