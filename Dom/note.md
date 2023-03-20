@@ -87,4 +87,6 @@ setTimeout(() => {
 }, 10000)
 ```
 
-#### 
+####  capturing and dubbling
+
+![6DF0E35C43473494EB5BB48F4CA05162](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303201744869.png)

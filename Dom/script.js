@@ -25,9 +25,9 @@ const closeModal = function () {
 
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 const outid = btnCloseModal.getAttribute('class');
-console.log(outid);
+// console.log(outid);
 const body_element = document.getElementsByTagName('body')[0];
-console.log(body_element);
+// console.log(body_element);
  
 
 btnCloseModal.addEventListener('click', closeModal);
@@ -110,23 +110,36 @@ const alertH1 = function (e) {
 
 }
 
-h1.addEventListener('mouseenter', alertH1);
-console.log('this is the word!');
-setTimeout(() => {
-  h1.removeEventListener('mouseenter', alertH1);
-  alert('I was destoried!')
+// h1.addEventListener('mouseenter', alertH1);
+// console.log('this is the word!');
+// setTimeout(() => {
+//   h1.removeEventListener('mouseenter', alertH1);
+//   alert('I was destoried!')
 
-}, 10000)
+// }, 10000)
 
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
-console.log(document.title);
-const attr = document.getSelection();
-console.log(attr);
+
+
+// RGBA();
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min +1) + min);
+const randomColor = () => `rgba(${randomInt(0, 255)}, 
+${randomInt(0, 255)},
+${randomInt(0, 255)})`;
+console.log(randomColor());
+
+
+
+
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
+// console.log(document.title);
+// const attr = document.getSelection();
+// console.log(attr);
 
 
 // select element
+/*
 const header = document.querySelector('.header');
 console.log(header);
 const  allSections = document.querySelectorAll('.section');
@@ -251,5 +264,5 @@ console.log(logo_img.classList.contains('jonas')
 // don't use 
 // logo_img.className = 'jack';
 // console.log(logo_img.getAttribute('class'));
-
+*/
 

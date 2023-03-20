@@ -1,5 +1,5 @@
 /* The page is NOT responsive. You can implement responsiveness yourself if you wanna have some fun 😃 */
-
+@import '../node_modules/open-color/open-color.css';
 :root {
   --color-primary: #5ec576;
   --color-secondary: #ffcb03;
