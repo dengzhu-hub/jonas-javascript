@@ -9,6 +9,9 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const sectionId = document.getElementById("section--1");
 const sectionId2 = document.getElementById('section--2');
+const nav_link = document.querySelector('.nav__link');
+const  nav_item = document.querySelector('.nav');
+const nav_links = document.querySelector('.nav__links');
 // console.log(overlay);
 
 const openModal = function (e) {
@@ -45,7 +48,7 @@ allLink.forEach(link => {
   link.addEventListener('click', function (e) {
     e.preventDefault();
     const href = link.getAttribute('href');
-    console.log(href);
+    // console.log(href);
     
     // scroll to top 
     if (href === '#') {
@@ -93,6 +96,19 @@ btnScrollTo.addEventListener('click', function (e) {
 })
 
 
+
+nav_link.addEventListener('click', function (e) {
+  console.log('LINK');
+  
+})
+nav_links.addEventListener('click', function (e) {
+  console.log('Linked');
+  
+})
+nav_item.addEventListener('click', function (e) {
+  console.log('Linkeing');
+  
+})
 
 const h1 = document.querySelector('h1');
 // h1.addEventListener('mousedown', (e) => {
