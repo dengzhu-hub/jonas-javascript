@@ -8,6 +8,7 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const sectionId = document.getElementById("section--1");
+const sectionId2 = document.getElementById('section--2');
 // console.log(overlay);
 
 const openModal = function (e) {
@@ -61,10 +62,61 @@ allLink.forEach(link => {
   })
 })
 
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+btnScrollTo.addEventListener('click', function (e) {
+  
+ 
+  console.log(e);
+  console.log(e.target.getBoundingClientRect());
+  
+  const scroods1 = sectionId.getBoundingClientRect();
+  console.log(scroods1);
+  console.log('Current scroll (x/y)', window.pageXOffset, pageYOffset);
+  
+  console.log('height/width (viewport)', document.documentElement.clientHeight, document.documentElement.clientWidth);
+  
+
+  // scrool 
+// this is old way 
+// now we don't use it 
+
+  window.scrollTo( {
+    left: scroods1.left + window.pageXOffset,
+    top: scroods1.top + window.pageYOffset,
+    behavior: 'smooth',
+  })
+
+  // new way 
+  sectionId.scrollIntoView({
+    behavior: 'smooth',
+  })
+})
 
 
+
+const h1 = document.querySelector('h1');
+// h1.addEventListener('mousedown', (e) => {
+//   alert('adventListener')
+
+// })
+// h1.addEventListener('mouseout', function (e) {
+
+//   alert("mouseup!")
+// })
+
+// 事件监听可以嵌套监听，所以always use it；
+const alertH1 = function (e) {
+  alert('hi, do not click me, ok?');
+
+}
+
+h1.addEventListener('mouseenter', alertH1);
 console.log('this is the word!');
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1);
+  alert('I was destoried!')
 
+}, 10000)
 
 console.log(document.documentElement);
 console.log(document.head);
