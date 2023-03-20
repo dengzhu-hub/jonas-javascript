@@ -56,7 +56,7 @@ const  allSections = document.querySelectorAll('.section');
 console.log(allSections);
 console.log(allSections.length);
 console.log(allSections.keys());
-
+document.getElements
 document.getElementById("section--1");
 const allButton = document.getElementsByTagName("button");
 console.log(allButton);
@@ -141,4 +141,8 @@ console.log(liAttr)
 //  alert(li.getAttribute('title'));
 //
 // })
-
+const twitter = document.querySelector('.twitter-link');
+console.log(twitter.getAttribute('href'));
+console.log(twitter.href);
+const link_item = document.querySelector('.footer__link');
+console.log(link_item.getAttribute('href'));
