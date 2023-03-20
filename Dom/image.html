@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image</title> 
+    <style>
+        html {
+            font-size: 62.5%;
+        }
+        .gallary {
+            width: 70%;
+            height: 65%;
+        }
+        .list {
+            list-style: none;
+            font-size: 1.7rem;
+        }
+        .link {
+            text-decoration: none;
+        }
+        .link:link,
+        .link:visited {
+            /* background-color: #cf711f; */
+  font-size: 2rem;
+  display: inline-block;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+  text-decoration: none;
+  font-weight: 600;
+  /* */
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+
+  /* transition: background-color 0.3s; */
+  transition: all 0.3s;
+
+        }
+        .picbox {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Snapshots</h1>
+    <ul class="list">
+        <li class="list-item"><a class="link"  title="image" href="img/people.jpg" onclick="showPic(this); return false;" >people</a></li>
+        <li class="list-item"><a class="link"  title="image" href="img/cat.jpg" onclick="showPic(this); return false;" >cat</a></li>
+        <li class="list-item"><a class="link" title="image"  href="img/landscape.jpg" onclick="showPic(this); return false;" >landscape</a></li>
+        <li class="list-item"><a class="link"  title="image" href="img/boolom.jpg" onclick="showPic(this); return false;" >booloum</a></li>
+        <li class="list-item"><a class="link" title="image"  href="img/pets.jpg" onclick="showPic(this); return false;" >pets</a></li>
+    </ul>
+ <div class="picbox">
+    <img id="palceholders" src="img/gallary.jpg" class="gallary" alt="">
+ </div>
+  <!-- <a href="https://chat.openai.com/chat" onclick="return true" target="_blank">Click me</a> -->
+    
+
+  <script defer  src="image.js"></script>
+</body>
+</html>

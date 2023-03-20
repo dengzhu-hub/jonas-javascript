@@ -31,3 +31,7 @@ header.append(message);  //作为子元素
 //header.before(message);  //这样就是header的兄弟了，在他前面显示
 //header.after(message);   //这样就是header的兄弟了，在他后面显示
 ```
+
+## Dom
+-----
+### 标记

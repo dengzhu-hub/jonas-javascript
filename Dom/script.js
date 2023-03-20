@@ -8,6 +8,7 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const sectionId = document.getElementById("section--1");
+// console.log(overlay);
 
 const openModal = function (e) {
   e.preventDefault();
@@ -36,6 +37,30 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+
+const allLink = document.querySelectorAll('a:link');
+allLink.forEach(link => {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    const href = link.getAttribute('href');
+    console.log(href);
+    
+    // scroll to top 
+    if (href === '#') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
+    if (href !== '#' && href.startsWith('#')) {
+      const otherLink = document.querySelector(href);
+      otherLink.scrollIntoView({behavior: 'smooth'});
+    }
+
+  })
+})
+
 
 
 console.log('this is the word!');
@@ -76,7 +101,7 @@ console.log(message.nodeType);
 
  message.classList.add('cookie-message');
 message.innerHTML = 'we use cookie for improved functionality and analytics <button class="btn btn--close-cookie">Got it</button>';
-header.append(message);  //作为子元素
+// header.append(message);  //作为子元素
 // header.prepend(message.cloneNode(true));
 //header.before(message);  //这样就是header的兄弟了，在他前面显示
 //header.after(message);   //这样就是header的兄弟了，在他后面显示
@@ -94,19 +119,19 @@ header.append(message);  //作为子元素
 
 //delete element
 
-document.querySelector('.btn--close-cookie').addEventListener('click', function () {
+// document.querySelector('.btn--close-cookie').addEventListener('click', function () {
 
-  message.remove();
+//   message.remove();
 
-})
+// })
 
 
 // styles
 
 
-message.style.backgroundColor = '#ff00ff'; // 这样设置只存在与 inline style
-message.style.width = '120%';
-message.style.fontSize = '5.4rem';
+// message.style.backgroundColor = '#ff00ff'; // 这样设置只存在与 inline style
+// message.style.width = '120%';
+// message.style.fontSize = '5.4rem';
 
 // getComputedStyle( ) 样式
 // console.log(getComputedStyle(message).fontSize);
@@ -146,3 +171,33 @@ console.log(twitter.getAttribute('href'));
 console.log(twitter.href);
 const link_item = document.querySelector('.footer__link');
 console.log(link_item.getAttribute('href'));
+console.log(link_item.href);
+
+// data -attribute 
+
+const logo_img = document.getElementById('logo');
+logo_img.setAttribute('designer', 'jonas');
+console.log(logo_img.getAttribute('designer'));
+
+console.log(logo_img.getAttribute('data-version-number'));
+
+console.log(logo_img.dataset.versionNumber);
+
+// classes 
+logo_img.classList.add('jonas');
+console.log(logo_img.getAttribute('class'));
+
+logo_img.classList.remove('jonas');
+console.log(logo_img.getAttribute('class'));
+
+logo_img.classList.toggle('jonas');
+console.log(logo_img.getAttribute('class'));
+console.log(logo_img.classList.contains('jonas')
+);
+
+
+// don't use 
+// logo_img.className = 'jack';
+// console.log(logo_img.getAttribute('class'));
+
+
