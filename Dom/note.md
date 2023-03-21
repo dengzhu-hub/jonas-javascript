@@ -90,3 +90,37 @@ setTimeout(() => {
 ####  capturing and dubbling
 
 ![6DF0E35C43473494EB5BB48F4CA05162](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303201744869.png)
+
+* 举例
+  * ![](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303211106361.png)
+
+  * ```javascript
+    nav_link.addEventListener('click', function (e) {
+      console.log('LINK', e.target);
+      this.style.backgroundColor = randomColor();
+      
+      
+    })// 子元素可以捕获父元素，父元素不能捕获子元素。
+    nav_links.addEventListener('click', function (e) {
+      console.log('Linked', e.target);
+      this.style.backgroundColor = randomColor();
+      
+      
+    })
+    nav.addEventListener('click', function (e) {
+      console.log('Linkeing', e.target);
+      this.style.backgroundColor = randomColor();
+    
+      
+    })
+    ```
+
+  * 解释捕获和冒泡：
+
+    * JavaScript 的捕获和冒泡指的是事件传播的两个不同阶段，当事件在文档对象模型（DOM）中的元素上触发时会发生。
+
+      在捕获阶段，事件从 DOM 层次结构中的最顶层元素开始，并向下移动到目标元素。在此阶段，目标元素的每个祖先元素都有机会在到达目标元素之前处理事件。可以通过在添加事件侦听器时将 `useCapture` 参数设置为 `true` 来启用此阶段，但这是可选的。
+
+      在冒泡阶段，事件从目标元素开始，并向上移动到顶层元素。在此阶段，目标元素被处理后，每个祖先元素都有机会处理事件。这是事件传播的默认行为。
+
+      例如，假设我们有一个嵌套在父级 div 元素中的 div 元素，并单击内部 div。在捕获阶段中，事件将从最顶层元素（文档元素）开始向下移动，直到到达内部 div。在此阶段中，内部 div 的任何祖先元素都有机会处理事件。在冒泡阶段中，事件将从内部 div 开始向上移动，直到到达文档元素。在此阶段中，内部 div 的任何祖先元素也都有机会处理事件。
