@@ -13,7 +13,29 @@ const nav_link = document.querySelector('.nav__link');
 const all_nav_link = document.querySelectorAll('.nav__link');
 const  nav = document.querySelector('.nav');
 const nav_links = document.querySelector('.nav__links');
+// console.log( typeof sectionId);
+
 // console.log(overlay);
+
+const h1s  = document.querySelector('h1');
+console.log(h1s.childNodes[0].nodeValue); //本身文本h1
+console.log(h1s.querySelectorAll('.highlight'));
+
+console.log(h1s.nodeType);
+
+const h1Text = h1s.firstChild.nodeValue;
+console.log( h1Text);
+
+console.log(h1s.firstElementChild.style.color = '#ff00ff');
+console.log(h1s.childNodes);
+console.log(h1s.children) // 在direct children 有效
+
+
+// going upwards 
+
+console.log(h1s.parentElement);
+console.log(h1s.parentNode);
+h1s.closest('header') .style.backgroundColor = 'var(--gradient-primary)';
 
 const openModal = function (e) {
   e.preventDefault();
@@ -193,12 +215,12 @@ console.log(randomColor());
 
 
 
-// console.log(document.documentElement);
-// console.log(document.head);
-// console.log(document.body);
-// console.log(document.title);
-// const attr = document.getSelection();
-// console.log(attr);
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
+console.log(document.title);
+const attr = document.getSelection();
+console.log(attr);
 
 
 // select element

@@ -9,6 +9,9 @@
         html {
             font-size: 62.5%;
         }
+        body {
+            position: relative;
+        }
         .gallary {
             width: 70%;
             height: 65%;
@@ -41,6 +44,14 @@
         .picbox {
             text-align: center;
         }
+        .position {
+            position: absolute;
+            top: 4rem;
+            left: 44rem;;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #ae3ec9;
+        }
 
     </style>
 </head>
@@ -48,14 +59,16 @@
     <h1>Snapshots</h1>
     <ul class="list">
         <li class="list-item"><a class="link"  title="image" href="img/people.jpg" onclick="showPic(this); return false;" >people</a></li>
-        <li class="list-item"><a class="link"  title="image" href="img/cat.jpg" onclick="showPic(this); return false;" >cat</a></li>
-        <li class="list-item"><a class="link" title="image"  href="img/landscape.jpg" onclick="showPic(this); return false;" >landscape</a></li>
-        <li class="list-item"><a class="link"  title="image" href="img/boolom.jpg" onclick="showPic(this); return false;" >booloum</a></li>
-        <li class="list-item"><a class="link" title="image"  href="img/pets.jpg" onclick="showPic(this); return false;" >pets</a></li>
+        <li class="list-item"><a class="link"  title="cat" href="img/cat.jpg" onclick="showPic(this); return false;" >cat</a></li>
+        <li class="list-item"><a class="link" title="landscape"  href="img/landscape.jpg" onclick="showPic(this); return false;" >landscape</a></li>
+        <li class="list-item"><a class="link"  title="boolom" href="img/boolom.jpg" onclick="showPic(this); return false;" >booloum</a></li>
+        <li class="list-item"><a class="link" title="pets"  href="img/pets.jpg" onclick="showPic(this); return false;" >pets</a></li>
     </ul>
  <div class="picbox">
     <img id="palceholders" src="img/gallary.jpg" class="gallary" alt="">
  </div>
+ <p id="description" class="position">choose the image</p>
+
   <!-- <a href="https://chat.openai.com/chat" onclick="return true" target="_blank">Click me</a> -->
     
 

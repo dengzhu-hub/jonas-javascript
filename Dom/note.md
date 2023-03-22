@@ -112,7 +112,7 @@ setTimeout(() => {
       this.style.backgroundColor = randomColor();
     
       
-    })
+    })  我们可以将捕获设置为true，就能捕获了。
     ```
 
   * 解释捕获和冒泡：
@@ -124,3 +124,62 @@ setTimeout(() => {
       在冒泡阶段，事件从目标元素开始，并向上移动到顶层元素。在此阶段，目标元素被处理后，每个祖先元素都有机会处理事件。这是事件传播的默认行为。
 
       例如，假设我们有一个嵌套在父级 div 元素中的 div 元素，并单击内部 div。在捕获阶段中，事件将从最顶层元素（文档元素）开始向下移动，直到到达内部 div。在此阶段中，内部 div 的任何祖先元素都有机会处理事件。在冒泡阶段中，事件将从内部 div 开始向上移动，直到到达文档元素。在此阶段中，内部 div 的任何祖先元素也都有机会处理事件。
+
+* 阻止(*stopPropagation*)
+
+  * ```javascript
+    e.stopPropagation(); // 应该不使用这个
+    ```
+
+  * 随机产生一个颜色
+
+    * ```javascript
+      // RGBA();
+      const randomInt = (min, max) => Math.floor(Math.random() * (max - min +1) + min);
+      const randomColor = () => `rgba(${randomInt(0, 255)}, 
+      ${randomInt(0, 255)},
+      ${randomInt(0, 255)})`;
+      console.log(randomColor());
+      
+      ```
+
+  * Dom元素和方法
+  
+    * childNodes
+  
+    * nodeValue
+  
+    * nodeType
+  
+    * firstChild
+  
+    * lastChild
+  
+    * lastElementChild
+  
+    * firstElementChild
+  
+    * children
+  
+    * 举例
+  
+      * ```javascript
+        
+        const h1s  = document.querySelector('h1');
+        console.log(h1s.childNodes[0].nodeValue); //本身文本h1
+        
+        console.log(h1s.nodeType);
+        
+        const h1Text = h1s.firstChild.nodeValue;
+        console.log( h1Text);
+        
+        console.log(h1s.firstElementChild.style.color = 'white');
+        
+        console.log(h1s.childNodes);
+        console.log(h1s.children) // 在direct children 有效
+        
+        ```
+  
+      * 
+  
+    
