@@ -55,14 +55,32 @@ console.log(h1s.previousSibling);
 
 
 // Tabbed component 
-
-tabs.forEach(t => {
-  t.addEventListener('click', () => {
-    console.log('tabbed');
+// not use this
+// tabs.forEach(t => {
+//   t.addEventListener('click', () => {
+//     console.log('tabbed');
     
-  })
-})
+//   })
+// })
+tab_containers.addEventListener('click', function (e) {
+  e.preventDefault();
+  const click = e.target.closest('.operations__tab');
+  console.log(click);
+  // guard clasue
+  if (!click) return;
+  // active  tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  contents.forEach(t => t.classList.remove('operations__content--active'));
+  click.classList.add('operations__tab--active');
+console.log(click.getAttribute('data-tab'));
 
+  // active content area
+  document.querySelector(`.operations__content--${click.getAttribute('data-tab')}`).classList
+  .add('operations__content--active');
+ 
+
+
+})
 
 const openModal = function (e) {
   e.preventDefault();
