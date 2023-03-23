@@ -44,6 +44,7 @@ console.log( h1s.parentElement.children);
 console.log( h1s.parentNode.childNodes);// 
 h1s.closest('h1') .style.backgroundImage = 'var( --gradient-secondary)'
 
+;
 
 //going sideways: siblings
 
@@ -51,7 +52,6 @@ console.log(h1s.previousElementSibling);
 console.log(h1s.nextElementSibling);
 console.log(h1s.nextSibling);
 console.log(h1s.previousSibling);
-
 
 
 // Tabbed component 
@@ -73,6 +73,8 @@ tab_containers.addEventListener('click', function (e) {
   contents.forEach(t => t.classList.remove('operations__content--active'));
   click.classList.add('operations__tab--active');
 console.log(click.getAttribute('data-tab'));
+console.log(click.dataset.tab);
+
 
   // active content area
   document.querySelector(`.operations__content--${click.getAttribute('data-tab')}`).classList
@@ -81,6 +83,34 @@ console.log(click.getAttribute('data-tab'));
 
 
 })
+
+// Menu fade animation
+const hinderHover = function (e, opacity) {
+  const link = e.target;
+  // console.log(this, e.currentTarget);
+  
+  if (link.classList.contains('nav__link')) {
+    const slbing = nav_link.closest('.nav').querySelectorAll('.nav__link');
+    console.log(slbing);
+    
+    const logo = nav_link.closest('.nav').querySelector('img');
+    console.log(logo);
+    slbing.forEach(li => {
+      if (li !== link) li.style.opacity = this;
+    });
+    logo.style.opacity = this;
+    
+
+  }
+
+}
+// use bind method is the better way doing this
+nav.addEventListener('mouseover', hinderHover.bind(0.5) );
+nav.addEventListener('mouseout', hinderHover.bind(1));
+
+
+
+
 
 const openModal = function (e) {
   e.preventDefault();

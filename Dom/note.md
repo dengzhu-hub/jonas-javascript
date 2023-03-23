@@ -1,3 +1,5 @@
+![IMG_1270(20230305-114235)](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232101086.JPG)
+
 # 笔记
 
 ## 选择器
@@ -199,7 +201,77 @@ setTimeout(() => {
           
           ```
         
-        * 
+        * ![image-20230323223946050](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232239116.png)
         
     
+    * going sideways: siblings
     
+      * ```javascript
+        console.log(h1s.previousElementSibling);
+        console.log(h1s.nextElementSibling);
+        console.log(h1s.nextSibling);
+        console.log(h1s.previousSibling);
+        
+        ```
+    
+      * ![image-20230323224047546](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232240582.png)
+
+* tab operation 
+  * ![image-20230323224146338](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232241381.png)
+
+```javascript
+tab_containers.addEventListener('click', function (e) {
+  e.preventDefault();
+  const click = e.target.closest('.operations__tab');
+  console.log(click);
+  // guard clasue
+  if (!click) return;
+  // active  tab
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  contents.forEach(t => t.classList.remove('operations__content--active'));
+  click.classList.add('operations__tab--active');
+console.log(click.getAttribute('data-tab'));
+    console.log(click.dataset.tab);
+
+  // active content area
+  document.querySelector(`.operations__content--${click.getAttribute('data-tab')}`).classList
+  .add('operations__content--active');
+ 
+
+
+})
+```
+
+* 导航栏淡化
+
+  * ```javascript
+    // Menu fade animation
+    const hinderHover = function (e, opacity) {
+      const link = e.target;
+      // console.log(this, e.currentTarget);
+      
+      if (link.classList.contains('nav__link')) {
+        const slbing = nav_link.closest('.nav').querySelectorAll('.nav__link');
+        console.log(slbing);
+        
+        const logo = nav_link.closest('.nav').querySelector('img');
+        console.log(logo);
+        slbing.forEach(li => {
+          if (li !== link) li.style.opacity = this;
+        });
+        logo.style.opacity = this;
+        
+    
+      }
+    
+    }
+    // use bind method is the better way doing this
+    nav.addEventListener('mouseover', hinderHover.bind(0.5) );
+    nav.addEventListener('mouseout', hinderHover.bind(1));
+    
+    
+    ```
+
+  * 把鼠标放在导航栏上，其他导航栏会淡化
+
+  * ![image-20230323224623218](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232246258.png)
