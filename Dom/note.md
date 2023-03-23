@@ -180,6 +180,26 @@ setTimeout(() => {
         
         ```
   
-      * 
-  
+        * going upwards
+        
+        * ```javascript
+          
+          console.log( h1s.parentElement.children);
+          console.log( h1s.parentNode.childNodes);// 
+          h1s.closest('h1') .style.backgroundImage = 'var( --gradient-secondary)'
+          
+          
+          //going sideways: siblings
+          
+          console.log(h1s.previousElementSibling);
+          console.log(h1s.nextElementSibling);
+          console.log(h1s.nextSibling);
+          console.log(h1s.previousSibling);
+          
+          
+          ```
+        
+        * 
+        
+    
     

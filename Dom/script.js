@@ -13,6 +13,13 @@ const nav_link = document.querySelector('.nav__link');
 const all_nav_link = document.querySelectorAll('.nav__link');
 const  nav = document.querySelector('.nav');
 const nav_links = document.querySelector('.nav__links');
+const tab_containers = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const contents = document.querySelectorAll('.operations__content');
+console.log(contents);
+
+
+
 // console.log( typeof sectionId);
 
 // console.log(overlay);
@@ -26,16 +33,36 @@ console.log(h1s.nodeType);
 const h1Text = h1s.firstChild.nodeValue;
 console.log( h1Text);
 
-console.log(h1s.firstElementChild.style.color = '#ff00ff');
+h1s.firstElementChild.style.color =  '#ff0022';
 console.log(h1s.childNodes);
 console.log(h1s.children) // 在direct children 有效
 
 
 // going upwards 
 
-console.log(h1s.parentElement);
-console.log(h1s.parentNode);
-h1s.closest('header') .style.backgroundColor = 'var(--gradient-primary)';
+console.log( h1s.parentElement.children);
+console.log( h1s.parentNode.childNodes);// 
+h1s.closest('h1') .style.backgroundImage = 'var( --gradient-secondary)'
+
+
+//going sideways: siblings
+
+console.log(h1s.previousElementSibling);
+console.log(h1s.nextElementSibling);
+console.log(h1s.nextSibling);
+console.log(h1s.previousSibling);
+
+
+
+// Tabbed component 
+
+tabs.forEach(t => {
+  t.addEventListener('click', () => {
+    console.log('tabbed');
+    
+  })
+})
+
 
 const openModal = function (e) {
   e.preventDefault();
