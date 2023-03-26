@@ -4,47 +4,46 @@
 // Modal window
 // #ff00ff
 const modal = document.querySelector('.modal');
+const header = document.querySelector('.header__title');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
-const sectionId = document.getElementById("section--1");
+const sectionId = document.getElementById('section--1');
 const sectionId2 = document.getElementById('section--2');
 const nav_link = document.querySelector('.nav__link');
 const all_nav_link = document.querySelectorAll('.nav__link');
-const  nav = document.querySelector('.nav');
+const nav = document.querySelector('.nav');
 const nav_links = document.querySelector('.nav__links');
 const tab_containers = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const contents = document.querySelectorAll('.operations__content');
+const allSections = document.querySelectorAll('.section');
+const imageTarget = document.querySelectorAll('img[data-src]');
+const slider = document.querySelectorAll('.slide');
 console.log(contents);
-
-
 
 // console.log( typeof sectionId);
 
 // console.log(overlay);
 
-const h1s  = document.querySelector('h1');
+const h1s = document.querySelector('h1');
 console.log(h1s.childNodes[0].nodeValue); //本身文本h1
-console.log(h1s.querySelectorAll('.highlight'));
+console.log(h1s.querySelector('.highlight'));
 
 console.log(h1s.nodeType);
 
 const h1Text = h1s.firstChild.nodeValue;
-console.log( h1Text);
+console.log(h1Text);
 
-h1s.firstElementChild.style.color =  '#ff0022';
+// h1s.firstElementChild.style.color = '#ff0022';
 console.log(h1s.childNodes);
-console.log(h1s.children) // 在direct children 有效
+console.log(h1s.children); // 在direct children 有效
 
+// going upwards
 
-// going upwards 
-
-console.log( h1s.parentElement.children);
-console.log( h1s.parentNode.childNodes);// 
-h1s.closest('h1') .style.backgroundImage = 'var( --gradient-secondary)'
-
-;
+console.log(h1s.parentElement.children);
+console.log(h1s.parentNode.childNodes); //
+// h1s.closest('h1').style.backgroundImage = 'var( --gradient-secondary)';
 
 //going sideways: siblings
 
@@ -53,13 +52,12 @@ console.log(h1s.nextElementSibling);
 console.log(h1s.nextSibling);
 console.log(h1s.previousSibling);
 
-
-// Tabbed component 
+// Tabbed component
 // not use this
 // tabs.forEach(t => {
 //   t.addEventListener('click', () => {
 //     console.log('tabbed');
-    
+
 //   })
 // })
 tab_containers.addEventListener('click', function (e) {
@@ -72,44 +70,115 @@ tab_containers.addEventListener('click', function (e) {
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
   contents.forEach(t => t.classList.remove('operations__content--active'));
   click.classList.add('operations__tab--active');
-console.log(click.getAttribute('data-tab'));
-console.log(click.dataset.tab);
-
+  console.log(click.getAttribute('data-tab'));
+  console.log(click.dataset.tab);
 
   // active content area
-  document.querySelector(`.operations__content--${click.getAttribute('data-tab')}`).classList
-  .add('operations__content--active');
- 
-
-
-})
+  document
+    .querySelector(`.operations__content--${click.getAttribute('data-tab')}`)
+    .classList.add('operations__content--active');
+});
 
 // Menu fade animation
-const hinderHover = function (e, opacity) {
+const hinderHover = function (e) {
   const link = e.target;
   // console.log(this, e.currentTarget);
-  
+
   if (link.classList.contains('nav__link')) {
     const slbing = nav_link.closest('.nav').querySelectorAll('.nav__link');
-    console.log(slbing);
-    
+    // console.log(slbing);
+
     const logo = nav_link.closest('.nav').querySelector('img');
-    console.log(logo);
+    // console.log(logo);
     slbing.forEach(li => {
       if (li !== link) li.style.opacity = this;
     });
     logo.style.opacity = this;
-    
-
   }
-
-}
+};
+// passing "argument" into handler
 // use bind method is the better way doing this
-nav.addEventListener('mouseover', hinderHover.bind(0.5) );
+nav.addEventListener('mouseover', hinderHover.bind(0.5));
 nav.addEventListener('mouseout', hinderHover.bind(1));
 
+// stick  navgation
+
+// window.addEventListener('scroll', function () {
+//   console.log(window.scrollY);
+//   const initCords = sectionId.getBoundingClientRect();
+//   console.log(initCords);
+
+//   if (window.scrollY > initCords.top)  nav.classList.add('sticky');
+//   else nav.classList.remove('sticky');
+
+// })
+
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+
+const callback = function (entries) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (entry.intersectionRatio === 0) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+
+const obs = new IntersectionObserver(callback, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+obs.observe(header);
+
+// revealSection
+const revealSection = function (entries, observe) {
+  const [entry] = entries;
+  // console.log(entry);
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observe.unobserve(entry.target);
+};
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
+ // lazy loading images
+
+ const lodingImag = function(entries, observe) {
+  const [entry] = entries;
+  console.log(entry);
+  if (!entry.isIntersecting) return;
+  entry.target.src = entry.target.dataset.src;
+  // entry.target.classList.remove('lazy-img');  不建议使用这种，网速慢的情况下，加载会很慢
+  // 使用自带的load event， 我们只需要监听 
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+
+  });
+  observe.unobserve(entry.target);
+  
+
+ }
+
+ const lazySectionObserve = new IntersectionObserver(lodingImag, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+
+ })
+ imageTarget.forEach(img => {
+  lazySectionObserve.observe(img);
 
 
+ })
+
+
+//  Slider 
 
 
 const openModal = function (e) {
@@ -129,7 +198,6 @@ const outid = btnCloseModal.getAttribute('class');
 // console.log(outid);
 const body_element = document.getElementsByTagName('body')[0];
 // console.log(body_element);
- 
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -140,28 +208,24 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-
-//page navigation 
+//page navigation
 
 // all_nav_link.forEach(el => {
 //   el.addEventListener('click', function (e) {
 //     e.preventDefault();
 //     const id = this.getAttribute('href');
 //     console.log( typeof id);
-    
+
 //     document.getElementById(id.slice(1)).scrollIntoView({
 //       behavior: 'smooth',
 //     })
 //   })
 // })
 
-
-
-
 // 1. add event listener to common parent element
 // 2. Determine what element originated the event
 
-nav_links.addEventListener('click', (e) => {
+nav_links.addEventListener('click', e => {
   e.preventDefault();
   // matching strategy
   if (e.target.classList.contains('nav__link')) {
@@ -169,12 +233,10 @@ nav_links.addEventListener('click', (e) => {
     console.log(id);
     document.querySelector(id).scrollIntoView({
       behavior: 'smooth',
-    })
-    
+    });
   }
   console.log(e.target);
-  
-})
+});
 
 // const allLink = document.querySelectorAll('a:link');
 // console.log(allLink);
@@ -184,8 +246,8 @@ nav_links.addEventListener('click', (e) => {
 //     e.preventDefault();
 //     const href = this.getAttribute('href');
 //     console.log(href);
-    
-//     // scroll to top 
+
+//     // scroll to top
 //     if (href === '#') {
 //       window.scrollTo({
 //         top: 0,
@@ -204,17 +266,20 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 btnScrollTo.addEventListener('click', function (e) {
   console.log(e);
   console.log(e.target.getBoundingClientRect());
-  
+
   const scroods1 = sectionId.getBoundingClientRect();
   console.log(scroods1);
   console.log('Current scroll (x/y)', window.pageXOffset, pageYOffset);
-  
-  console.log('height/width (viewport)', document.documentElement.clientHeight, document.documentElement.clientWidth);
-  
 
-  // scrool 
-// this is old way 
-// now we don't use it 
+  console.log(
+    'height/width (viewport)',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // scrool
+  // this is old way
+  // now we don't use it
 
   // window.scrollTo( {
   //   left: scroods1.left + window.pageXOffset,
@@ -222,13 +287,11 @@ btnScrollTo.addEventListener('click', function (e) {
   //   behavior: 'smooth',
   // })
 
-  // new way 
+  // new way
   sectionId.scrollIntoView({
     behavior: 'smooth',
-  })
-})
-
-
+  });
+});
 
 // nav_link.addEventListener('click', function (e) {
 //   console.log('LINK', e.target, e.currentTarget);
@@ -237,22 +300,19 @@ btnScrollTo.addEventListener('click', function (e) {
 //   //stop propagation
 //   // we should not use this ,
 //   // e.stopPropagation();
-  
-  
+
 // })
 // nav_links.addEventListener('click', function (e) {
 //   console.log('Linked', e.target, e.currentTarget);
 //   console.log(this === e.currentTarget);
-  
+
 //   this.style.backgroundColor = randomColor();
-  
-  
+
 // })
 // nav.addEventListener('click', function (e) {
 //   console.log('Linkeing', e.target, e.currentTarget);
 //   this.style.backgroundColor = randomColor();
 
-  
 // })
 
 const h1 = document.querySelector('h1');
@@ -268,7 +328,7 @@ const h1 = document.querySelector('h1');
 // 事件监听可以嵌套监听，所以always use it；
 const alertH1 = function (e) {
   alert('hi, do not click me, ok?');
-}
+};
 
 // h1.addEventListener('mouseenter', alertH1);
 // console.log('this is the word!');
@@ -278,17 +338,13 @@ const alertH1 = function (e) {
 
 // }, 10000)
 
-
-
 // RGBA();
-const randomInt = (min, max) => Math.floor(Math.random() * (max - min +1) + min);
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
 const randomColor = () => `rgba(${randomInt(0, 255)}, 
 ${randomInt(0, 255)},
 ${randomInt(0, 255)})`;
 console.log(randomColor());
-
-
-
 
 console.log(document.documentElement);
 console.log(document.head);
@@ -296,7 +352,6 @@ console.log(document.body);
 console.log(document.title);
 const attr = document.getSelection();
 console.log(attr);
-
 
 // select element
 /*
@@ -332,14 +387,14 @@ message.innerHTML = 'we use cookie for improved functionality and analytics <but
 //header.after(message);   //这样就是header的兄弟了，在他后面显示
 // header.appendChild(message);
 // header.append(message);
-// window.onload = function () {
-//   const para = document.createElement('p');
-//   let info = "NodeName:";
-//   info += para.nodeName;
-//   info += " nodeType:";
-//   info += para.nodeType;
-//   alert(info);
-// }
+window.onload = function () {
+  const para = document.createElement('p');
+  let info = "NodeName:";
+  info += para.nodeName;
+  info += " nodeType:";
+  info += para.nodeType;
+  alert(info);
+}
 
 
 //delete element
@@ -425,4 +480,3 @@ console.log(logo_img.classList.contains('jonas')
 // logo_img.className = 'jack';
 // console.log(logo_img.getAttribute('class'));
 */
-
