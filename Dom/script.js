@@ -20,6 +20,7 @@ const contents = document.querySelectorAll('.operations__content');
 const allSections = document.querySelectorAll('.section');
 const imageTarget = document.querySelectorAll('img[data-src]');
 const slider = document.querySelectorAll('.slide');
+const sliders = document.querySelector('.slider');
 console.log(contents);
 
 // console.log( typeof sectionId);
@@ -179,6 +180,13 @@ allSections.forEach(section => {
 
 
 //  Slider 
+
+sliders.style.overflow = 'visible';
+sliders.style.transform = `scale(0.3) translateX(-1200px)`;
+
+slider.forEach((slde, i) => {
+  slde.style.transform = `translateX(${100 * i}%)`;
+})
 
 
 const openModal = function (e) {
