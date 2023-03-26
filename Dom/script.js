@@ -152,111 +152,113 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 });
 
- // lazy loading images
+// lazy loading images
 
- const lodingImag = function(entries, observe) {
+const lodingImag = function (entries, observe) {
   const [entry] = entries;
   console.log(entry);
   if (!entry.isIntersecting) return;
   entry.target.src = entry.target.dataset.src;
   // entry.target.classList.remove('lazy-img');  不建议使用这种，网速慢的情况下，加载会很慢
-  // 使用自带的load event， 我们只需要监听 
+  // 使用自带的load event， 我们只需要监听
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
-
   });
   observe.unobserve(entry.target);
-  
+};
 
- }
-
- const lazySectionObserve = new IntersectionObserver(lodingImag, {
+const lazySectionObserve = new IntersectionObserver(lodingImag, {
   root: null,
   threshold: 0,
   rootMargin: '200px',
-
- })
- imageTarget.forEach(img => {
+});
+imageTarget.forEach(img => {
   lazySectionObserve.observe(img);
+});
 
-
- });
-
-
-//  Slider 
+//  Slider
 // 0% 100% 200% 300%
 let currSlide = 0;
 const maxSlide = slider.length;
 // sliders.style.overflow = 'visible';
 // sliders.style.transform = `scale(0.3) translateX(-1200px)`;
+const sliderFunction = function () {
+  // FUNCTION
+  const goToSlide = function (slide) {
+    slider.forEach((slde, i) => {
+      console.log(i);
+      // console.log(currSlide);
+      slde.style.transform = `translateX(${100 * (i - slide)}%)`;
+    });
+  };
+  const createDots = function () {
+    slider.forEach((_, i) => {
+      dots.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
 
-const goToSlide = function (slide) {
-  slider.forEach((slde, i) => {
-    console.log(i);
-    // console.log(currSlide);
-    slde.style.transform = `translateX(${100 * (i - slide)}%)`;
-    
-  })
+  const init = function () {
+    createDots();
+    goToSlide(0);
+    activeDot(0);
+  };
 
-}
-const dot_slider =  document.querySelectorAll('.dots__dot');
-const activeDot = function (slide) {
- document.querySelectorAll('.dots__dot').forEach(dot =>
-  dot.classList.remove('dots__dot--active'));
-  document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
-}
-const goToPrevSlide = function () {
-  if (currSlide === 0) currSlide = maxSlide - 1;
-  else currSlide--;
-  goToSlide(currSlide);
-  activeDot(currSlide);
-}
-const goToNextSlide = function () {
-  if (currSlide === maxSlide - 1) {
-    currSlide = 0;
-  }
-  else {
-    currSlide++; 
-  } 
-  goToSlide(currSlide);
-  activeDot(currSlide);
-}
-goToSlide(0);
-// -100% 0% 100% 200%
-btn_right.addEventListener('click', goToNextSlide);
-btn_left.addEventListener('click', goToPrevSlide);
+  const activeDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  const goToPrevSlide = function () {
+    if (currSlide === 0) currSlide = maxSlide - 1;
+    else currSlide--;
+    goToSlide(currSlide);
+    activeDot(currSlide);
+  };
+  const goToNextSlide = function () {
+    if (currSlide === maxSlide - 1) {
+      currSlide = 0;
+    } else {
+      currSlide++;
+    }
+    goToSlide(currSlide);
+    activeDot(currSlide);
+  };
+  init();
+
+  // -100% 0% 100% 200%
+  btn_right.addEventListener('click', goToNextSlide);
+  btn_left.addEventListener('click', goToPrevSlide);
   // console.log('did');
-document.addEventListener('keyup', function (e) {
-  //  
-  console.log(e.key);
-  
-  if (e.key === 'ArrowLeft') goToPrevSlide();
-  // else if (e.key === 'ArrowRight') goToNextSlide();
-  // shorting circuiting 
-  e.key === 'ArrowRight' && goToNextSlide();
-  
-})
-const createDots = function () {
-  slider.forEach((_, i) => {
-    dots.insertAdjacentHTML('beforeend', 
-    `<button class="dots__dot" data-slide="${i}"></button>`)
-    
-  })
-}
- 
-createDots();
+  document.addEventListener('keyup', function (e) {
+    //
+    console.log(e.key);
 
-dots.addEventListener('click', function (e) {
-  if (e.target.classList.contains('dots__dot')) {
-    console.log('dot');
-    const {slide} = e.target.dataset;
-    console.log(slide);
-    goToSlide(slide);
-    activeDot(slide);
-    
-    
-  }
-})
+    if (e.key === 'ArrowLeft') goToPrevSlide();
+    // else if (e.key === 'ArrowRight') goToNextSlide();
+    // shorting circuiting
+    e.key === 'ArrowRight' && goToNextSlide();
+  });
+
+  dots.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      console.log('dot');
+      const { slide } = e.target.dataset;
+      console.log(slide);
+      goToSlide(slide);
+      activeDot(slide);
+    }
+  });
+};
+sliderFunction();
+
+// setInterval(sliderFunction, 2000);
 
 
 
