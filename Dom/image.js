@@ -1,6 +1,7 @@
 'use strict';
 const placeholder = document.getElementById('palceholders');
 const desc = document.querySelector('#description');
+const link = document.querySelectorAll('.popUp');
 // console.log(desc.getAttribute('title'));
 
 console.log(desc.nodeValue);
@@ -30,4 +31,22 @@ var body_element = document.getElementsByTagName('body')[0];
 console.log(body_element.childNodes.length); //节点类型，远非元素节点一种。
 console.log(body_element.nodeType); //节点类型，远非元素节点一种。
 // noteType
+const openUrl = function (winURL) {
+   window.open(winURL, 'popup', 'width=320, height=300')
 
+}
+// openUrl('https://www.baidu.com');
+
+
+window.onload = prepareLinks;
+function prepareLinks () {
+   link.forEach(t => {
+      if (t.getAttribute('class') === 'popUp'){
+         t.onclick = function () {
+            openUrl(this.getAttribute('href'));
+            return false;
+         }
+      }
+   })
+
+}

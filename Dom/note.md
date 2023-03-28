@@ -146,25 +146,39 @@ setTimeout(() => {
       ```
 
   * Dom元素和方法
-  
+
     * childNodes
-  
+
     * nodeValue
-  
+
     * nodeType
-  
+
     * firstChild
-  
+
     * lastChild
-  
+
     * lastElementChild
-  
+
     * firstElementChild
-  
+
     * children
-  
+
+    #### 达成目标的过程和目标本身同样重要
+
+    * 剪切和粘贴成了编写Javascript脚本的代名词
+    
+    * #### javascript 平稳退化
+    
+    * JavaScript伪协议
+    
+    * 向CSS学习
+    
+      * 文档结构、文档样式分离
+    
+    
+    
     * 举例
-  
+    
       * ```javascript
         
         const h1s  = document.querySelector('h1');
@@ -181,7 +195,7 @@ setTimeout(() => {
         console.log(h1s.children) // 在direct children 有效
         
         ```
-  
+    
         * going upwards
         
         * ```javascript
@@ -275,3 +289,73 @@ console.log(click.getAttribute('data-tab'));
   * 把鼠标放在导航栏上，其他导航栏会淡化
 
   * ![image-20230323224623218](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303232246258.png)
+
+* sticky navigation
+
+  * Intersection()API
+
+  * 接收两个参数
+
+    ```javascript
+    var observer = new IntersectionObserver(callback[, options]);
+    
+    ```
+
+    **callback**
+
+    * 当元素可见比例超过指定阈值后，会调用一个回调函数，此回调函数接受两个参数
+
+    **entries**
+
+    * 一个[`IntersectionObserverEntry`](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserverEntry)对象的数组，每个被触发的阈值，都或多或少与指定阈值有偏差。
+
+    **observer**
+
+    * 被调用的[`IntersectionObserver`](https://developer.mozilla.org/zh-CN/docs/Web/API/IntersectionObserver)实例。
+
+    `options` 可选
+
+    一个可以用来配置 observer 实例的对象。如果`options`未指定，observer 实例默认使用文档视口作为 root，并且没有 margin，阈值为 0%（意味着即使一像素的改变都会触发回调函数）。你可以指定以下配置：
+
+    **root**
+
+    监听元素的祖先元素[`Element`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element)对象，其边界盒将被视作视口。目标在根的可见区域的的任何不可见部分都会被视为不可见。
+
+    **rootMargin**
+
+    一个在计算交叉值时添加至根的边界盒 ([bounding_box (en-US)](https://developer.mozilla.org/en-US/docs/Glossary/Bounding_box)) 中的一组偏移量，类型为字符串 (string) ，可以有效的缩小或扩大根的判定范围从而满足计算需要。语法大致和 CSS 中的[`margin`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/margin) 属性等同; 可以参考 [intersection root 和 root margin](https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API#the_intersection_root_and_root_margin) 来深入了解 margin 的工作原理及其语法。默认值是"0px 0px 0px 0px"。
+
+    **threshold**
+
+    规定了一个监听目标与边界盒交叉区域的比例值，可以是一个具体的数值或是一组 0.0 到 1.0 之间的数组。若指定值为 0.0，则意味着监听元素即使与根有 1 像素交叉，此元素也会被视为可见。若指定值为 1.0，则意味着整个元素都在可见范围内时才算可见。可以参考[阈值](https://developer.mozilla.org/zh-CN/docs/Web/API/Intersection_Observer_API#thresholds)来深入了解阈值是如何使用的。阈值的默认值为 0.0。
+
+  * ```javascript
+    const obs = new IntersectionObserver(callback, {
+      root: null,
+      threshold: 0,
+      rootMargin: `-${navHeight}px`,
+    });
+    obs.observe(header);
+    
+    ```
+
+  * callback function 
+
+    * ```javascript
+      const callback = function (entries) {
+        const [entry] = entries;
+        console.log(entry);
+        if (entry.intersectionRatio === 0) nav.classList.add('sticky');
+        else nav.classList.remove('sticky');
+      };	
+      ```
+
+    * rootMargin
+
+      * ```javascript
+        const navHeight = nav.getBoundingClientRect().height;
+        ```
+
+        ![image-20230326093948248](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303260939416.png)
+
+![image-20230326110753804](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303261107965.png)
