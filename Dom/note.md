@@ -359,3 +359,194 @@ console.log(click.getAttribute('data-tab'));
         ![image-20230326093948248](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303260939416.png)
 
 ![image-20230326110753804](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202303261107965.png)
+
+####  *revealSection*
+
+* 创建IntersectionObserver 接口
+
+  * ```javascript
+    const sectionObserver = new IntersectionObserver(revealSection, {
+      root: null,
+      threshold: 0.15,
+    });
+    ```
+
+  * 创建revealSection函数
+
+    * ```javascript
+      const revealSection = function (entries, observe) {
+        const [entry] = entries;
+        // console.log(entry);
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('section--hidden');
+        observe.unobserve(entry.target);
+      };
+      ```
+
+  * options
+
+    * ```json
+      {root: null,
+        threshold: 0.15,}
+      ```
+
+  * 遍历每一个sections
+
+    * ```javascript
+      allSections.forEach(section => {
+        sectionObserver.observe(section);   调用接口的observe()
+        section.classList.add('section--hidden');
+      });
+      ```
+
+      
+
+#### *lazy loading images*
+
+* 也是使用接口
+
+  * ```javascript
+    const lazySectionObserve = new IntersectionObserver(lodingImag, {
+      root: null,
+      threshold: 0,
+      rootMargin: '200px',
+    });
+    ```
+
+  * ```javascript
+    
+    const lodingImag = function (entries, observe) {
+      const [entry] = entries;
+      console.log(entry);
+      if (!entry.isIntersecting) return;
+      entry.target.src = entry.target.dataset.src;
+      // entry.target.classList.remove('lazy-img');  不建议使用这种，网速慢的情况下，加载会很慢
+      // 使用自带的load event， 我们只需要监听
+      entry.target.addEventListener('load', function () {
+        entry.target.classList.remove('lazy-img');
+      });
+      observe.unobserve(entry.target);
+    };
+    
+    ```
+
+    * 调用observe()
+
+      * ```javascript
+        imageTarget.forEach(img => {
+          lazySectionObserve.observe(img);
+        });
+        
+        ```
+
+  ####  *Slider*
+
+   * 设置规则，默认显示图片
+
+     * ```javascript
+         const goToSlide = function (slide) {
+           slider.forEach((slde, i) => {
+             console.log(i);
+             // console.log(currSlide);
+             slde.style.transform = `translateX(${100 * (i - slide)}%)`;
+           });
+         };
+       ```
+
+   * 当图片滑到右边最后一张时，再点击箭头将跳转到第一张
+
+     * ```javascript
+         const goToNextSlide = function () {
+           if (currSlide === maxSlide - 1) {
+             currSlide = 0;
+           } else {
+             currSlide++;
+           }
+           goToSlide(currSlide);
+           activeDot(currSlide);
+         };
+         btn_right.addEventListener('click', goToNextSlide);
+       ```
+
+   * 这个是反着的
+
+     * ```
+         const goToPrevSlide = function () {
+           if (currSlide === 0) currSlide = maxSlide - 1;
+           else currSlide--;
+           goToSlide(currSlide);
+           activeDot(currSlide);
+         };
+           btn_left.addEventListener('click', goToPrevSlide);
+       
+       ```
+
+   * 键盘按下也能实现
+
+     * ```javascript
+         document.addEventListener('keyup', function (e) {
+           //
+           console.log(e.key);
+       
+           if (e.key === 'ArrowLeft') goToPrevSlide();
+           // else if (e.key === 'ArrowRight') goToNextSlide();
+           // shorting circuiting
+           e.key === 'ArrowRight' && goToNextSlide();
+         });
+       ```
+
+     * 创建dot
+
+       * ```javascript
+           const createDots = function () {
+             slider.forEach((_, i) => {
+               dots.insertAdjacentHTML(
+                 'beforeend',
+                 `<button class="dots__dot" data-slide="${i}"></button>`
+               );
+             });
+           };
+         
+         ```
+
+     * 激活
+
+       * ```javascript
+           const activeDot = function (slide) {
+             document
+               .querySelectorAll('.dots__dot')
+               .forEach(dot => dot.classList.remove('dots__dot--active'));
+             document
+               .querySelector(`.dots__dot[data-slide="${slide}"]`)
+               .classList.add('dots__dot--active');
+           };
+         ```
+
+     * init 
+
+       * ```javascript
+           const init = function () {
+             createDots();
+             goToSlide(0);
+             activeDot(0);
+           };
+         ```
+
+       * init()
+
+     * 把这些函数都用一个函数包含
+
+       * ```javascript
+         const sliderFunction = function () {....}
+         ```
+
+       * sliderFunction();
+
+​                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+### OOP
+
+* abstraction
+* encapsulation
+* inheritance
+* polymorphism

@@ -260,8 +260,6 @@ sliderFunction();
 
 // setInterval(sliderFunction, 2000);
 
-
-
 const openModal = function (e) {
   e.preventDefault();
 
@@ -425,14 +423,14 @@ const randomInt = (min, max) =>
 const randomColor = () => `rgba(${randomInt(0, 255)}, 
 ${randomInt(0, 255)},
 ${randomInt(0, 255)})`;
-console.log(randomColor());
+// console.log(randomColor());
 
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
-console.log(document.title);
-const attr = document.getSelection();
-console.log(attr);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
+// console.log(document.title);
+// const attr = document.getSelection();
+// console.log(attr);
 
 // select element
 /*
@@ -561,3 +559,17 @@ console.log(logo_img.classList.contains('jonas')
 // logo_img.className = 'jack';
 // console.log(logo_img.getAttribute('class'));
 */
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built', e);
+});
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// 离开网页时提示
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = 'Are you sure you want to leave?';
+// });
