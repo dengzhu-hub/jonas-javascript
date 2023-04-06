@@ -196,7 +196,7 @@ console.log(cat.hasOwnProperty('species'));
 
 
 const obj = new Object();
-console.log(dog.__proto__.__proto__);
+console.log(dog.__proto__);
 console.log(cat);
 console.log(Animal.prototype);
 console.dir(Animal.prototype.constructor);
@@ -248,20 +248,42 @@ car2.decreaseSpeed();
 
 // ES6 class 
 const PersonCl = class {
-    constructor(firthName, birthYear) {
-        this.firthName = firthName;
+    constructor(fullName, birthYear) {
+        this.fullName = fullName;
         this.birthYear = birthYear;
     }
 
-
+//  Method will be added to the .prototype propety 
+// instance method 
         sayName() {
-        console.log(this.firthName);
+        console.log(this.fullName);
     }
     calcAge() {
         return 2023 - this.birthYear;
     }
+    set fullName (name) {
+        console.log(name);
+        if (name.includes(' ')) this._fullName = name;
+        else alert(`${name} is not a full name`);
+        
+        
+
+    }
+    get fullName () {
+        return this._fullName;
+    }
+
+    // static method 
+    static sayHey(name) {
+        console.log(`${name} , nice to meet you`);
+    }
 }
-const jons = new PersonCl('Jonas', 2001);
+
+PersonCl.sayHey('jonas');
+const jonas = new PersonCl('John schemdtmann', 1994);
+console.log(jonas);
+
+const jons = new PersonCl('Jonas juny', 2001);
 console.log(PersonCl.prototype === jons.__proto__);
 console.log(jons.__proto__);
 console.log(PersonCl.prototype);
@@ -280,7 +302,16 @@ const account = {
     },
     set latest(mov) {
         this.movements[this.movements.length - 1] = mov;
-    }
+    },
+    calAge () {
+        console.log(2023 - this.birthYear);
+        
+
+    },
+    init (firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    },
     
 }
 console.log(account);
@@ -293,9 +324,70 @@ account.latest = 1000;
 console.log(account.latest);
 
 
+const y = Array.from({ length: 6 }, () => 2);
+console.log(y);
+const z = Array.from({ length: 6 }, (_, i) => i + 1);
+console.log(z);
+const e = Array.from({ length: 100 }, () => Math.floor(Math.random() * 100));
+console.log(e);
+
+// static method 
+PersonCl.sayHey = function () {
+    console.log('hello world');
+    console.log(this);
+    
+}
+
+// Object.create 
+const jack = Object.create(account);
+console.log(jack);
+jack.name = 'John';
+jack.ag = 23;
+jack.birthYear = 2001;
+jack.calAge();
+jack.init('study', 2000);
+jack.calAge();
+
+console.log(jack);
+const la = jack.latest;
+console.log(la);
 
 
+// code challenge2 
+const CarOfCl = class {
+    constructor(make, speed) {
+        this.make = make;
+        this.speed = speed;
+    }
+   accelerateSpeed = function () {
+        this.speed += 10;
+        console.log(`the new speed ${this.speed}km/h`);
         
+    };
+    decreaseSpeed = function () {
+        this.speed -= 5;
+        console.log(`this new speed ${this.speed}km/h`);
+        
+        
+    };
+    get speedUS() {
+        return this.speed / 1.6;
+    }
+    set speedUS(speed) {
+        return this.speed = speed * 1.6;
+
+    }
+
+}
+
+const ford = new CarOfCl('ford', 120);
+console.log(ford.speedUS);
+
+ford.accelerateSpeed();
+ford.speedUS = 48;
+console.log(ford);
+
+
     
 
 
