@@ -544,9 +544,3 @@ console.log(click.getAttribute('data-tab'));
 
 ​                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 
-### OOP
-
-* abstraction
-* encapsulation
-* inheritance
-* polymorphism

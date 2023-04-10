@@ -145,8 +145,10 @@ console.log(namea);
 
 // 1. new {} created
 // 2. function is called, this = {}
-// 3. {} linked to proptotype 
-// 4. function automatically return {} 
+// 3. {} linked to proptotype
+// 4. function automatically return {}
+
+/*
 function Person(name, age) {
   this.name = name;
   this.age = age;
@@ -387,8 +389,176 @@ ford.accelerateSpeed();
 ford.speedUS = 48;
 console.log(ford);
 
+*/
 
-    
+// inheritance
+/*
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+Person.prototype.calAge = function () {
+  console.log(2023 - this.birthYear);
+};
 
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+Student.prototype.calAge = function () {
+  console.log(`2037 - ${this.birthYear}`);
+};
 
+Student.prototype = Object.create(Person.prototype);
 
+const Jonas = new Student('Jonas', 2001, 'Javascript');
+console.log(Jonas);
+Jonas.calAge();
+Student.prototype.constructor = Student;
+console.log(Student.prototype.__proto__);
+console.dir(Student.prototype.constructor);
+
+// code challenge3
+
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+Car.prototype.accelerateSpeed = function () {
+  this.speed += 10;
+  console.log(`the new speed ${this.speed}km/h`);
+};
+Car.prototype.decreaseSpeed = function () {
+  this.speed -= 5;
+  console.log(`this new speed ${this.speed}km/h`);
+};
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerateSpeed = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `${this.make} going at ${this.speed}km/h, with a charge of ${this.charge}%`
+  );
+};
+EV.prototype.constructor = EV;
+
+const tesla = new EV('tesla', 120, 23);
+// tesla.chargeBattery(90);
+// tesla.decreaseSpeed();
+// tesla.accelerateSpeed();
+// console.log(tesla);
+
+// inheritance of ES6
+const PersonCl = class {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  //  Method will be added to the .prototype propety
+  // instance method
+  sayName() {
+    console.log(this.fullName);
+  }
+  calcAge() {
+    return 2023 - this.birthYear;
+  }
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+  get fullName() {
+    return this._fullName;
+  }
+
+  // static method
+  static sayHey(name) {
+    console.log(`${name} , nice to meet you`);
+  }
+};
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+    this.course = course;
+  }
+  introduce(name) {
+    console.log(`${this.fullName} is major in ${this.course}`);
+  }
+  calcAge() {
+    console.log(`${2037 - this.birthYear}`);
+  }
+}
+const martha = new StudentCl('Martha Jonas', 2001, 'python');
+console.log(martha);
+martha.calcAge();
+
+martha.introduce();
+
+const personProto = {
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+  clacAge() {
+    console.log(2037 - this.birthYear);
+  },
+};
+const StudentProto = Object.create(personProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  personProto.init.call(this, firstName, birthYear, course);
+  this.course = course;
+};
+StudentProto.introduce = function () {
+  console.log(`my name is ${this.firstName} and I study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('jay', 2001, 'javascript');
+// console.log(personProto.prototype.constructor === StudentProto.__proto__);
+jay.introduce();
+jay.clacAge();
+*/
+
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        this.locale = navigator.language;
+        this.movements = []
+    };
+    deposit(val) {
+        this.movements.push(val);
+    }
+    withdraw(val) {
+        this.deposit(-val);
+    }
+    approveLoan(val) {
+        return true;
+    }
+    requestLoan(val) {
+        if (this.approveLoan(val)) {
+            this.deposit(val);
+            console.log('Load approved');
+            
+        }
+    }
+}
+
+const acc1 = new Account('Jonas', 'en-zhu', '1111');
+acc1.deposit(29123);
+acc1.deposit(2000);
+acc1.withdraw(450);
+console.log(acc1);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
