@@ -24,3 +24,4 @@
 ![IMG_1293(20230401-201523)](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202304081023645.JPG)
 
 ### Encapsulation
+this is encapsulation
