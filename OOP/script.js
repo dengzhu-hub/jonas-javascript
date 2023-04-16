@@ -529,37 +529,166 @@ jay.introduce();
 jay.clacAge();
 */
 
+/*
+public fields
+private fields
+public method 
+private method
+there is also static version
+*/
 class Account {
+  // public (instance)
+  locale = navigator.language;
+  // private (instance)
+  #owner; // 私有属性
+  #movements = [];
+  #pin;
   constructor(owner, currency, pin) {
-    this.owner = owner;
+    this.#owner = owner;
     this.currency = currency;
+    // this.locale = navigator.language;
+    // protected property
     this.pin = pin;
-    this.locale = navigator.language;
-    this.movements = [];
+    // this._movements = [];
   }
-  deposit(val) {
-    this.movements.push(val);
-  }
+
+  // public method
+
+  // public interface
   withdraw(val) {
     this.deposit(-val);
-  }
-  approveLoan(val) {
-    return true;
+    return this;
   }
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this._approveLoan(val)) {
       this.deposit(val);
       console.log('Load approved');
+      return this;
     }
+  }
+
+  // private method
+
+  getMovements() {
+    return this.#movements;
+  }
+  getOwner() {
+    return this.#owner;
+  }
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+  _approveLoan(val) {
+    return true;
+  }
+  static helper(name) {
+    console.log(`Hello ${name}, we can help you`);
+  }
+  static getOwner(name) {
+    console.log(`if you can help me, you can ${name}`);
   }
 }
 
 const acc1 = new Account('Jonas', 'en-zhu', '1111');
+// acc1._movements.push(100);
+// acc1._movements.push(-100);
 acc1.deposit(29123);
-acc1.deposit(2000);
-acc1.withdraw(450);
+acc1.deposit(20300);
+acc1.withdraw(4450);
 console.log(acc1);
-acc1.requestLoan(1000);
-acc1.approveLoan(1000);
+// acc1.requestLoan(1000);
+// acc1._approveLoan(1000);
 console.log(acc1.pin);
-console.log(acc1.owner);
+console.log(acc1.getOwner());
+// console.log(acc1.#pin); //不可访问#
+
+console.log(acc1._approveLoan(999));
+acc1.requestLoan(9999);
+
+console.log(acc1.getMovements());
+Account.helper('Jonas');
+Account.helper('en-zhu');
+Account.getOwner('Jonas');
+
+// chaining method
+acc1.deposit(29123).deposit(20300).requestLoan(9999).withdraw(4450);
+console.log(acc1.getMovements());
+
+// code challenge 4
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+  accelerateSpeed = function () {
+    this.speed += 10;
+    console.log(`the new speed ${this.speed}km/h`);
+  };
+
+  decreaseSpeed = function () {
+    this.speed -= 5;
+    console.log(`this new speed ${this.speed}km/h`);
+  };
+}
+
+const CarOfCl = class {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+  accelerateSpeed() {
+    this.speed += 10;
+    console.log(`the new speed ${this.speed}km/h`);
+  }
+  decreaseSpeed() {
+    this.speed -= 5;
+    console.log(`this new speed ${this.speed}km/h`);
+    return this;
+  }
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speed) {
+    return (this.speed = speed * 1.6);
+  }
+};
+
+class EvCl extends CarOfCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+
+  accelerateSpeed() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} going at ${this.speed}km/h, with a charge of ${
+        this.#charge
+      }%`
+    );
+    return this;
+  }
+}
+
+const rivian = new EvCl('rivian', 120, 23);
+rivian.accelerateSpeed();
+console.log(rivian.speedUS);
+rivian.speedUS = 100;
+
+rivian
+  .accelerateSpeed()
+  .accelerateSpeed()
+  .decreaseSpeed()
+  .chargeBattery(48)
+  .accelerateSpeed();
+
+  console.log(rivian.speedUS);
+  
