@@ -313,6 +313,7 @@ let currentAccount, timer;
 // labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(dates);
 
 
+
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
@@ -452,6 +453,9 @@ btnClose.addEventListener('click', function (e) {
     console.log('something wrong');
   }
 });
+
+
+
 
 console.log(accounts);
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
