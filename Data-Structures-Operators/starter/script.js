@@ -325,8 +325,8 @@ console.log(rest2);
 
 rest1.numGuests = rest1.owner && 1;
 rest2.numGuests = rest2.owner && 3;
-rest1.owner &&= '<ANONYMOUS>';
-rest2.owner &&= '<ANONYMOUS>';
+// rest1.owner &&= '<ANONYMOUS>';
+// rest2.owner &&= '<ANONYMOUS>';
 console.log(rest1);
 console.log(rest2);
 
@@ -427,8 +427,6 @@ const game = {
 
 // Set
 
-
-
 // const m = new Set();
 // m.add('Jonas');
 // console.log(m);
@@ -463,18 +461,16 @@ const staffUnique = [new Set(staff)];
 
 // Map
 
-
-
 // Map 的键可以为任何JavaScript类型；
 // 跟object的区别；
-// const m = new Map([sZX]);
-// // console.log(...m);
-// const rest = new Map();
-// rest.set('name', 'jonas').set(1, 'Firenze').set(2, 'Libosn');
-// console.log(rest.set('age', 23));
-// // for (const [key, value] of rest.entries()) {
-// //   console.log(key + ',' + value);
-// // }
+const m = new Map();
+// console.log(...m);
+const rest = new Map();
+rest.set('name', 'jonas').set(1, 'Firenze').set(2, 'Libosn');
+console.log(rest.set('age', 23));
+for (const [key, value] of rest.entries()) {
+  console.log(key + ',' + value);
+}
 // rest.set(true, 'We are open: D').set(false, 'We are closed: D');
 // rest.set('open', 11).set('close', 23);
 // console.log(rest.get(true));
@@ -665,20 +661,22 @@ const maskCreditCard = function (number) {
   return last.padStart(str.length, '*');
 };
 
-// console.log(maskCreditCard(123123124124124));
-// console.log(maskCreditCard(5345252424));
-// console.log(maskCreditCard(1414717835431));
+console.log(maskCreditCard(123123124124124));
+console.log(maskCreditCard(5345252424));
+console.log(maskCreditCard(1414717835431));
 
 // repeat
 const messageNews = 'we are family, do you think so. \n';
 console.log(messageNews.repeat(5));
+console.log(messageNews.repeat(4));
+
 
 const planeInLine = function (num) {
   console.log(`There are ${num} planes in line ${'🛬'.repeat(num)}`);
 };
-// planeInLine(4);
-// planeInLine(12);
-// planeInLine(3);
+planeInLine(4);
+planeInLine(12);
+planeInLine(3);
 
 // code challenge #4 🛬
 document.body.append(document.createElement('textarea'));
@@ -709,12 +707,12 @@ for (const flights of flight.split('+')) {
   // console.log(flights);
   const [type, from, to, time] = flights.split(';');
   console.log(type, from, to, time);
-  
+
   const output = `${type.startsWith('_Delayed') ? '🎃' : ''}${type.replaceAll(
     '_',
     ' '
   )} ${getCode(from).padEnd(6, ' to').padStart(11, 'from ')} ${getCode(
     to
-  )} (${time.replace(':', 'h')})`.padStart(36);
+  )} (${time.replace(':', 'h')})`.padStart(36, "*");
   console.log(output);
 }
