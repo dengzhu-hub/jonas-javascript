@@ -692,3 +692,12 @@ rivian
 
   console.log(rivian.speedUS);
   
+
+  class Car {
+    constructor(speed, make) {
+      this.speed = speed;
+      this.make = make;
+    }
+    
+
+  }

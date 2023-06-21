@@ -34,21 +34,21 @@
 // const age = calAge(1991);
 // console.log(age);
 
-// // scope chain vs call stack
-// const a = "Jonas";
+// scope chain vs call stack
+// const a = 'Jonas';
 // // first();
 // function first() {
-//   const b = "hello";
+//   const b = 'hello';
 //   second();
 
 //   function second() {
-//     const c = "Hi";
+//     const c = 'Hi';
 //     third();
 //   }
-// }
-// function third() {
-//   const d = "Hey";
-//   console.log(d + c + b + a);
+//   function third() {
+//     const d = 'Hey';
+//     console.log(d + c + b + a);
+//   }
 // }
 
 // const myName = 'jonas';
@@ -83,7 +83,7 @@
 //   console.log(`Jonas is a ${job}`);
 //   const age = 2037 - 1989;
 //   console.log(age);
-//   const job = "teacher";
+//   var job = "teacher";
 //   console.log(x);
 // }
 
@@ -142,20 +142,20 @@
 // };
 // calAgeArrow(2001); // 箭头函数指向全局window
 
-// const jonas = {
-//   year: 1991,
-//   calAge: function () {
-//     console.log(this);
-//     console.log(2037 - this.year);
-//   },
-// };
-// jonas.calAge();
+const jonas = {
+  year: 1991,
+  calAge: function () {
+    console.log(this);
+    console.log(2037 - this.year);
+  },
+};
+jonas.calAge();
 
-// const matia = {
-//   year: 2017,
-// };
-// matia.calAge = jonas.calAge;
-// console.log(matia);
+const matia = {
+  year: 2017,
+};
+matia.calAge = jonas.calAge;
+console.log(matia);
 
 // matia.calAge(); // this 指向调用该方法的对象。
 

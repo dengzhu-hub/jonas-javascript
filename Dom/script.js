@@ -99,6 +99,7 @@ const hinderHover = function (e) {
       if (li !== link) li.style.opacity = this;
     });
     logo.style.opacity = this;
+    console.log(this);
   }
 };
 // passing "argument" into handler
