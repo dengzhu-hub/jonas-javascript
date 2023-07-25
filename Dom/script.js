@@ -424,7 +424,7 @@ const randomInt = (min, max) =>
 const randomColor = () => `rgba(${randomInt(0, 255)}, 
 ${randomInt(0, 255)},
 ${randomInt(0, 255)})`;
-// console.log(randomColor());
+console.log(randomColor());
 
 // console.log(document.documentElement);
 // console.log(document.head);
