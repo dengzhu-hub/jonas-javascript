@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# 忽略所有 .parcel-cache 文件夹
+.parcel-cache/
+
+# 忽略所有 node_modules 文件夹
+node_modules/
+
+# 忽略 forkify 项目的特定文件
+forkify/package-lock.json
+forkify/node_modules/
+
+forkify/dist/
