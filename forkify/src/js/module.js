@@ -1,10 +1,12 @@
 import { getJson } from './helper';
-import { API_URL } from './config';
+import { API_URL, CURRENT_PAGE } from './config';
 const state = {
   recipe: {},
   search: {
     query: '',
     results: [],
+    currentPage: CURRENT_PAGE,
+    page: 1,
   },
 };
 const loadRecipe = async id => {
@@ -49,4 +51,11 @@ const loadSearchResult = async query => {
   }
 };
 
-export { state, loadRecipe, loadSearchResult };
+const getSearchResultPerPage = (page = state.search.page) => {
+  state.search.page = page;
+  const startIndex = (page - 1) * state.search.currentPage;
+  const endIndex = startIndex + state.search.currentPage;
+  return state.search.results.slice(startIndex, endIndex);
+};
+
+export { state, loadRecipe, loadSearchResult, getSearchResultPerPage };
