@@ -40,10 +40,12 @@ const controlSearchResult = async function () {
     await module.loadSearchResult(query);
     console.log(module.state.search.results);
 
-    resultView.render(module.state.search.results);
-    console.log(module.getSearchResultPerPage(1));
-//render results
-    resultView.render(module.getSearchResultPerPage(4));
+    // resultView.render(module.state.search.results);
+    // console.log(module.getSearchResultPerPage());
+    //render results
+    resultView.render(module.getSearchResultPerPage());
+    console.log(module.getSearchResultPerPage());
+
     //rendder  initial pagination
     paginationView.render(module.state.search);
 
@@ -51,15 +53,13 @@ const controlSearchResult = async function () {
   } catch (err) {}
 };
 
-const controlPagination = async function (gotoPage) {
-  try {
+const controlPagination =  function (gotoPage) {
+  
     //render new result
     resultView.render(module.getSearchResultPerPage(gotoPage));
     //rendder  new pagination
     paginationView.render(module.state.search);
-  } catch (err) {
-    console.error(err);
-  }
+   
 };
 const init = () => {
   RecipeView.addHandlerRender(controlRecipe);

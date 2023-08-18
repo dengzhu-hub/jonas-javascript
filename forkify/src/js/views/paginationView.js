@@ -7,6 +7,7 @@ class Pagination extends View {
   addHandlerClick = function (handle) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--inline');
+      if (!btn) return;
       console.log(btn);
       const gotoPage = +btn.dataset.goto;
       handle(gotoPage);
@@ -43,13 +44,13 @@ class Pagination extends View {
 
     //one page,and other pages
 
-    if (this._data.page === 1 && this._data.page < numberOfPages) {
+    if (this._data.page === 1 && numberOfPages > 1) {
       //   return `one page and other pages`;
       return this._generatePaginationButton(icons, this._data.page + 1, 'next');
     }
 
     //last page
-    if (this._data.page === numberOfPages) {
+    if (this._data.page === numberOfPages && numberOfPages > 1) {
       //   return `last page`;
       return this._generatePaginationButton(icons, this._data.page - 1, 'prev');
     }

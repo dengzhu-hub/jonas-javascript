@@ -6,13 +6,12 @@ class View {
   _data;
 
   render(data) {
-    console.log('hihi');
-    
+    // console.log('hihi');
+
     // console.log(this._data);
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     this._data = data;
-    console.log(this._data);
 
     const markup = this._generateMarkup();
     this.clear();
