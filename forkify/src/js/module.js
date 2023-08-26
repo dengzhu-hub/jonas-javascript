@@ -33,7 +33,7 @@ const loadRecipe = async id => {
 
 const loadSearchResult = async query => {
   state.search.query = query;
-  const search = await getJson(`${API_URL}?search=pizza`);
+  const search = await getJson(`${API_URL}?search=${query}`);
   // console.log(search);
   state.search.results = search.data.recipes.map(rec => {
     return {
