@@ -53,16 +53,22 @@ const controlSearchResult = async function () {
   } catch (err) {}
 };
 
-const controlPagination =  function (gotoPage) {
-  
-    //render new result
-    resultView.render(module.getSearchResultPerPage(gotoPage));
-    //rendder  new pagination
-    paginationView.render(module.state.search);
-   
+const controlPagination = function (gotoPage) {
+  //render new result
+  resultView.render(module.getSearchResultPerPage(gotoPage));
+  //rendder  new pagination
+  paginationView.render(module.state.search);
+};
+
+const controlServings = function (newServings) {
+  //update the recipe serving (in state)
+  module.updateServings(newServings);
+  //updata the recipe view
+  RecipeView.render(module.state.recipe);
 };
 const init = () => {
   RecipeView.addHandlerRender(controlRecipe);
+  RecipeView.addHanlderUpdateServing(controlServings);
   searchView.addHandlerSearchResult(controlSearchResult);
   paginationView.addHandlerClick(controlPagination);
 };

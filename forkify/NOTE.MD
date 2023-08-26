@@ -1,8 +1,6 @@
 # FORKIFY
 
-
-
-今天有一次完成pagination，实现了左滑右滑，效果，搜索效果，显示效果，但是有一些render方面的问题，不过影响不大
+今天有一次完成 pagination，实现了左滑右滑，效果，搜索效果，显示效果，但是有一些 render 方面的问题，不过影响不大
 
 还有值得高兴的是，我歇会了如何.gitignore
 
@@ -46,8 +44,6 @@ forkify/dist/
 
 ```
 
-
-
 上效果
 
 截图
@@ -59,4 +55,35 @@ forkify/dist/
 ![image-20230818165707122](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202308181657295.png)
 
 ![image-20230818165725322](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202308181657841.png)
+
+开始第二部分
+![IMG_1452(20230826-093609)](https://makeforpicgo.oss-cn-chengdu.aliyuncs.com/study/202308261353611.JPG)
+
+publisher
+
+```javascript
+  addHanlderUpdateServing(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--update-servings');
+      if (!btn) return;
+      console.log(btn);
+      const updateTo = + btn.dataset.updateTo;
+      handler(updateTo);
+    });
+  }
+```
+
+module
+
+```javascript
+const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+    // newqy = oldQ * newSer / oldSer
+
+    state.recipe.servings = newServings;
+  });
+};
+ 
+```
 

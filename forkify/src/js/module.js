@@ -25,6 +25,8 @@ const loadRecipe = async id => {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
+    console.log(state.recipe);
+
     return data;
   } catch (err) {
     throw err;
@@ -57,5 +59,19 @@ const getSearchResultPerPage = (page = state.search.page) => {
   const endIndex = startIndex + state.search.currentPage;
   return state.search.results.slice(startIndex, endIndex);
 };
+const updateServings = function (newServings) {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+    // newqy = oldQ * newSer / oldSer
 
-export { state, loadRecipe, loadSearchResult, getSearchResultPerPage };
+    state.recipe.servings = newServings;
+  });
+};
+
+export {
+  state,
+  loadRecipe,
+  loadSearchResult,
+  getSearchResultPerPage,
+  updateServings,
+};
