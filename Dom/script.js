@@ -37,7 +37,7 @@ console.log(h1s.querySelector('.highlight'));
 
 console.log(h1s.nodeType);
 
-const h1Text = h1s.firstChild.nodeValue;
+const h1Text = h1s.firstChild.nodeName;
 console.log(h1Text);
 
 // h1s.firstElementChild.style.color = '#ff0022';
@@ -410,13 +410,13 @@ const alertH1 = function (e) {
   alert('hi, do not click me, ok?');
 };
 
-// h1.addEventListener('mouseenter', alertH1);
-// console.log('this is the word!');
-// setTimeout(() => {
-//   h1.removeEventListener('mouseenter', alertH1);
-//   alert('I was destoried!')
+h1.addEventListener('mouseenter', alertH1);
+console.log('this is the word!');
+setTimeout(() => {
+  h1.removeEventListener('mouseenter', alertH1);
+  alert('I was destoried!')
 
-// }, 10000)
+}, 1000)
 
 // RGBA();
 const randomInt = (min, max) =>

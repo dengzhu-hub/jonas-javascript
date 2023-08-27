@@ -478,7 +478,7 @@ console.log(click.getAttribute('data-tab'));
            activeDot(currSlide);
          };
            btn_left.addEventListener('click', goToPrevSlide);
-       
+         
        ```
 
    * 键盘按下也能实现
@@ -487,7 +487,7 @@ console.log(click.getAttribute('data-tab'));
          document.addEventListener('keyup', function (e) {
            //
            console.log(e.key);
-       
+         
            if (e.key === 'ArrowLeft') goToPrevSlide();
            // else if (e.key === 'ArrowRight') goToNextSlide();
            // shorting circuiting
@@ -506,7 +506,7 @@ console.log(click.getAttribute('data-tab'));
                );
              });
            };
-         
+           
          ```
 
      * 激活

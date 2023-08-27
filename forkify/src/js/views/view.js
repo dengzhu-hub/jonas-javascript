@@ -23,6 +23,14 @@ class View {
       return this.renderError();
     this._data = data;
     const newMarkup = this._generateMarkup();
+    const dom = document.createRange().createContextualFragment(newMarkup);
+    console.log(dom);
+
+    const newElement = Array.from(dom.querySelectorAll('*'));
+    console.log(newElement);
+    const curElement = Array.from(this._parentElement.querySelectorAll('*'));
+    console.log(curElement);
+    newElement.forEach((newEl, i) => {});
   }
   renderSpinner() {
     const markup = `
