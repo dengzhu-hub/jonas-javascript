@@ -6,3 +6,4 @@ var sayAge = function () {
 // alert(window.age);
 window.moveTo(0, 0);
 window.moveBy(0, 100);
+console.log(sayAge());

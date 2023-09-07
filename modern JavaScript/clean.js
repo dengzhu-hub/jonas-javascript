@@ -143,6 +143,7 @@ function func1(a, b, c) {
   // Expected output: 2
 
   console.log(arguments[2]);
+  
   // Expected output: 3
 }
 // arguments 是一个对应于传递
